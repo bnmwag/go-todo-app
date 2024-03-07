@@ -15,11 +15,6 @@ func main() {
 	}
 
 	command := os.Args[1]
-	index, err := strconv.Atoi(os.Args[2])
-	if err != nil {
-		fmt.Println("Invalid index: only numbers are allowed")
-		os.Exit(1)
-	}
 
 	switch command {
 	case "list", "l":
@@ -35,16 +30,32 @@ func main() {
 			fmt.Println("Usage: todo delete <index>")
 			os.Exit(1)
 		}
+		index, err := strconv.Atoi(os.Args[2])
+		if err != nil {
+			fmt.Println("Invalid index: only numbers are allowed")
+			os.Exit(1)
+		}
+
 		commands.DeleteTask(index)
 	case "check", "c":
 		if len(os.Args) < 3 {
 			fmt.Println("Usage: todo check <index>")
 			os.Exit(1)
 		}
+		index, err := strconv.Atoi(os.Args[2])
+		if err != nil {
+			fmt.Println("Invalid index: only numbers are allowed")
+			os.Exit(1)
+		}
 		commands.CheckTask(index)
 	case "uncheck", "u":
 		if len(os.Args) < 3 {
 			fmt.Println("Usage: todo uncheck <index>")
+			os.Exit(1)
+		}
+		index, err := strconv.Atoi(os.Args[2])
+		if err != nil {
+			fmt.Println("Invalid index: only numbers are allowed")
 			os.Exit(1)
 		}
 		commands.UncheckTask(index)
@@ -63,23 +74,24 @@ func main() {
 func usage() string {
 	// Define help message here
 	return `
-todo-cli - A simple todo list CLI application
+todo - A simple todo list CLI application
 
-Usage: todo-cli <command> [arguments]
+Usage: todo <command> [arguments]
+    Running just 'todo' without arguments will also display all tasks.
 
 Commands:
-	list, l       			Display all tasks
-  	add, a <task> 			Add a new task to the list
-							- Example: todo add "Buy groceries"
-	delete, d <index> 		Delete a task from the list
-							- Example: todo delete 3
-	check, c <index> 		Mark a task as complete
-							- Example: todo check 1
-	uncheck, u <index> 		Mark a task as incomplete
-							- Example: todo uncheck 1
-							
-  	help, h       			Display help information
-  	version, v    			Display version information
+    list, l                 Display all tasks
+    add, a      <task>      Add a new task to the list
+                            - Example: todo add "Write a todo-cli app in GO!"
+    delete, d   <index>     Delete a task from the list
+                            - Example: todo delete 3
+    check, c    <index>     Mark a task as complete
+                            - Example: todo check 1
+    uncheck, u  <index>     Mark a task as incomplete
+                            - Example: todo uncheck 1  
+
+    help, h                 Display help information
+    version, v              Display version information
 `
 }
 
