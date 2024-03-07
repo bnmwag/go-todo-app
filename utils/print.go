@@ -31,11 +31,11 @@ func PrintEmptyMessage() {
 	}
 
 	fmt.Println("\nYour list is empty! 🎉")
-	fmt.Printf(color.BlackString("%s\n\n"), emptyMessages[generateRandomInt(0, int64(len(emptyMessages)-1))])
+	fmt.Printf("%s\n\n", emptyMessages[generateRandomInt(0, int64(len(emptyMessages)-1))])
 }
 
 func PrintTable(tasks types.Todos) {
-	headerFmt := color.New(color.FgBlack).SprintfFunc()
+	headerFmt := color.New(color.FgHiGreen, color.Underline).SprintfFunc()
 
 	tbl := table.New("index", "Task", "State", "Added At", "Completed At")
 	tbl.WithHeaderFormatter(headerFmt).WithPadding(3)
