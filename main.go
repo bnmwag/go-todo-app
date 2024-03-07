@@ -8,6 +8,27 @@ import (
 	"github.com/bnmwag/go-todo-app/commands" // Replace with the actual path to your commands package
 )
 
+func getTask() string {
+	if len(os.Args) < 3 {
+		fmt.Println("Usage: todo add <task>")
+		os.Exit(1)
+	}
+	return os.Args[2]
+}
+
+func getIndex() int {
+	if len(os.Args) < 3 {
+		fmt.Println("Usage: todo delete <index>")
+		os.Exit(1)
+	}
+	index, err := strconv.Atoi(os.Args[2])
+	if err != nil {
+		fmt.Println("Invalid index: only numbers are allowed")
+		os.Exit(1)
+	}
+	return index
+}
+
 func main() {
 	if len(os.Args) < 2 {
 		commands.ListTasks()
@@ -20,45 +41,13 @@ func main() {
 	case "list", "l":
 		commands.ListTasks()
 	case "add", "a":
-		if len(os.Args) < 3 {
-			fmt.Println("Usage: todo add <task>")
-			os.Exit(1)
-		}
-		commands.AddTask(os.Args[2])
+		commands.AddTask(getTask())
 	case "delete", "d":
-		if len(os.Args) < 3 {
-			fmt.Println("Usage: todo delete <index>")
-			os.Exit(1)
-		}
-		index, err := strconv.Atoi(os.Args[2])
-		if err != nil {
-			fmt.Println("Invalid index: only numbers are allowed")
-			os.Exit(1)
-		}
-
-		commands.DeleteTask(index)
+		commands.DeleteTask(getIndex())
 	case "check", "c":
-		if len(os.Args) < 3 {
-			fmt.Println("Usage: todo check <index>")
-			os.Exit(1)
-		}
-		index, err := strconv.Atoi(os.Args[2])
-		if err != nil {
-			fmt.Println("Invalid index: only numbers are allowed")
-			os.Exit(1)
-		}
-		commands.CheckTask(index)
+		commands.CheckTask(getIndex())
 	case "uncheck", "u":
-		if len(os.Args) < 3 {
-			fmt.Println("Usage: todo uncheck <index>")
-			os.Exit(1)
-		}
-		index, err := strconv.Atoi(os.Args[2])
-		if err != nil {
-			fmt.Println("Invalid index: only numbers are allowed")
-			os.Exit(1)
-		}
-		commands.UncheckTask(index)
+		commands.UncheckTask(getIndex())
 	case "help", "h":
 		fmt.Println(usage())
 	case "version", "v":
