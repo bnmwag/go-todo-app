@@ -1,6 +1,6 @@
 # GO todo app
 
-This is a simple todo app written in Go. It uses a simple .json file to store the todos.
+This is a simple todo app written in Go. It uses a simple .json file to store the todos. (curruntly only for UNIX os).
 Wanted to learn other languages and Go was the first one I wanted to learn thanks to it's simplicity and efficiency.
 I also wanted a new way to keep track of my todos and thought it would be a good idea to combine the two "problems" into on solution.
 
